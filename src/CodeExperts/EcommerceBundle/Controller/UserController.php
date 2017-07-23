@@ -81,6 +81,7 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
+        var_dump($user);
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('CodeExperts\EcommerceBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
@@ -130,7 +131,6 @@ class UserController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('users_delete', array('id' => $user->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }
