@@ -44,6 +44,14 @@ class UserController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $passwordEncoder = $this->get('security.password_encoder');
+            $password = $passwordEncoder
+                ->encodePassword(
+                    $user,
+                    $request->request->get('password'));
+
+            $user->setRole('ROLE_ADMIN');
+            $user->setPassword($password);
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -81,12 +89,17 @@ class UserController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        var_dump($user);
         $deleteForm = $this->createDeleteForm($user);
         $editForm = $this->createForm('CodeExperts\EcommerceBundle\Form\UserType', $user);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $passwordEncoder = $this->get('security.password_encoder');
+            $password = $passwordEncoder
+                ->encodePassword(
+                    $user,
+                    $request->request->get('password'));
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('users_edit', array('id' => $user->getId()));

@@ -10,8 +10,6 @@
                 <th>Name</th>
                 <th>Username</th>
                 <th>Email</th>
-                <th>Role</th>
-                <th>Password</th>
                 <th>Isactive</th>
                 <th>Createdat</th>
                 <th>Updatedat</th>
@@ -25,8 +23,6 @@
                 <td>{{ user.name }}</td>
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
-                <td>{{ user.role }}</td>
-                <td>{{ user.password }}</td>
                 <td>{% if user.isActive %}Yes{% else %}No{% endif %}</td>
                 <td>{% if user.createdAt %}{{ user.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if user.updatedAt %}{{ user.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
